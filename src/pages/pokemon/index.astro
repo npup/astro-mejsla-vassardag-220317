@@ -4,14 +4,9 @@ import { getPokemonList } from "../../services/pokemon.ts";
 
 const pokemon = await getPokemonList();
 ---
-<style>
-    a {
-        text-transform: capitalize;
-    }
-</style>
 
 <Layout heading="Pokemon">
-    <ul>    
+    <ul>
     {
         pokemon.map(pokemon => (
             <li>
@@ -21,3 +16,9 @@ const pokemon = await getPokemonList();
     }
     </ul>
 </Layout>
+
+<style>
+    a {
+        text-transform: capitalize;
+    }
+</style>
