@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+
+        <title>: - )</title>
+
+        <link rel="stylesheet" href="/assets/slides/dist/reset.css" />
+        <link rel="stylesheet" href="/assets/slides/dist/reveal.css" />
+        <link rel="stylesheet" href="/assets/slides/dist/theme/black.css" />
+
+        <!-- Theme used for syntax highlighted code -->
+        <link
+            rel="stylesheet"
+            href="/assets/slides/plugin/highlight/monokai.css"
+        />
+        <style>
+            section .header {
+                display: flex;
+                justify-content: space-between;
+            }
+            section .main {
+                padding: 0 1em;
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <div class="header">
+                        <h2>Astro</h2>
+                    </div>
+                    <div class="main r-fit-text">
+                        <p>
+                            Astro är en SSG som fokuserar på att bygga sajter
+                            med bra prestanda, inklusive att minimera skeppande
+                            av (onödig) js till browsern - allt med en modern
+                            och smidig "developer experience".
+                        </p>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="header">
+                        <h3>Komma igång</h3>
+                    </div>
+                    <div class="main r-fit-text">
+                        Det finns templates, men låt oss börja från scratch.
+                        <pre><code data-trim data-noescape>
+                            mkdir astro && cd $_
+                            npm init -y
+                            npm i -D astro@0.23 prettier-plugin-astro
+                        </code></pre>
+
+                        <p>Minimal konfiguration</p>
+                        <pre><code data-trim data-noescape>
+                            echo "export default &#123;};" > astro.config.mjs
+                            echo '&#123;"compilerOptions": &#123; "moduleResolution": "node" } }' > tsconfig.json
+                        </code></pre>
+                        <p>
+                            Det finns en särskild påbjuden filstruktur (som man
+                            iofs kan konfigurera)
+                        </p>
+                        <pre><code data-trim data-noescape>
+                            mkdir src public                            
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="header">
+                        <h3>Kör</h3>
+                    </div>
+                    <div class="main r-fit-text">
+                        <pre>npx astro dev</pre>
+                        <p>- startar development server</p>
+                        <pre>npx astro build</pre>
+                        <p>- fullständigt bygge</p>
+                        <p>
+                            Projektet saknar fortfarande innehåll (<code
+                                >src/pages</code
+                            >)
+                        </p>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="header">
+                        <h3>Directories</h3>
+                    </div>
+
+                    <div class="main r-fit-text">
+                        <ul>
+                            <li>Allt i <code>src/pages</code> blir sidor</li>
+                            <li>
+                                I <code>public</code> kan man lägga publika, oprocessade
+                                filer. refereras som från webbroten.
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="header">
+                        <h3>Bygg</h3>
+                    </div>
+                    <div class="main r-fit-text">
+                        <pre>npm run build</pre>
+                        <p>
+                            Ange <code>buildOptions.site</code> i konfigurationen
+                            för att få en sitemap.xml vid bygge.
+                        </p>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="header">
+                        <h3>Astro-komponenter</h3>
+                    </div>
+                    <div class="main r-fit-text">
+                        <p>
+                            Astro-komponenterna är som tur är mer än bara
+                            html-sidor. De har först och främst ett s.k.
+                            _frontmatter_ och använder dessutom en JSX-liknande
+                            template-syntax. Annars är det helt likt HTML (inte
+                            JSX-html).
+                        </p>
+                        <h4>Frontmatter</h4>
+                        <p>
+                            I frontmatter kan man skriva kod som körs vid build
+                            time (bl.a. importera andra komponenter) och vars
+                            resultat kan användas för att generera sidor.
+                        </p>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="header">
+                        <h3>CSS</h3>
+                    </div>
+                    <div class="main r-fit-text">
+                        <h4>scoped</h4>
+                        <p>
+                            CSS som man skriver i en komponents style-tagg är
+                            automatiskt scoped.
+                        </p>
+
+                        <h4>global</h4>
+                        <p>
+                            Escape till global genom "global"-attribut (helst
+                            inte) eller (hellre) länka in global CSS från ett
+                            stylesheet.
+                        </p>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="header">
+                        <h3>parameteriserad routing</h3>
+                    </div>
+                    <div class="main r-fit-text">
+                        <p>
+                            Idén med filbaserad "routing" fortsätter - vi
+                            behöver
+                        </p>
+                        <ul>
+                            <li>filer för "pages"</li>
+                            <li>data</li>
+                        </ul>
+
+                        <p>
+                            En mallsida som skall generera flera sidor behöver
+                            exportera en funktion som beskriver pathen för varje
+                            sida man vill skapa.
+                        </p>
+
+                        <pre><code data-trim>
+                            export function getStaticPaths() &#123;
+                                return [&#123;
+                                    params: &#123;...},
+                                    props: &#123;...}
+                                }];
+                            }
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="header">
+                        <h3>Data från API</h3>
+                    </div>
+                    <div class="main r-fit-text">
+                        <p>
+                            Vid build time kan man göra nästan vad som helst,
+                            t.ex. skaffa datat från ett api. Bara
+                            <code>getStaticPaths</code>
+                            gör sitt jobb så kommer sidor att kunna genereras.
+                        </p>
+                        <p>
+                            Pokémon! Ett API bland flera finns på
+                            https://pokeapi.co/api/v2/pokemon/
+                        </p>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="header">
+                        <h3>Markdown</h3>
+                    </div>
+                    <div class="main r-fit-text">
+                        Astro stöder att man skriver content i markdown. Man kan
+                        i config peka ut egna markdown-parsers om den som följer
+                        med inte duger.
+                    </div>
+                </section>
+
+                <section>
+                    <div class="header">
+                        <h3>Markdown-komponenten</h3>
+                    </div>
+                    <div class="main r-fit-text">
+                        En av Astros inbyggda komponenter (finns fler)
+                    </div>
+                </section>
+
+                <section>
+                    <div class="header">
+                        <h3>Remote markdown</h3>
+                    </div>
+                    <div class="main r-fit-text">
+                        Man kan även ladda markdown från fjärran servrar och
+                        rendera vid build time.
+                    </div>
+                </section>
+
+                <section>
+                    <div class="header">
+                        <h3>Svelte, React, Vue, etc</h3>
+                    </div>
+                    <div class="main r-fit-text">
+                        Astro har stöd för ett flertal populära frontendramverk,
+                        och pluginsystemet för rendrering är avsett att göra det
+                        lätt att utöka kapaciteten. Just nu kan man få react,
+                        preact, vue, svelte, lit components och solid-js "direkt
+                        ur lådan".
+                    </div>
+                </section>
+
+                <section>
+                    <div class="header">
+                        <h3>Ende</h3>
+                    </div>
+                    <div class="main r-fit-text"></div>
+                </section>
+            </div>
+        </div>
+
+        <script src="/assets/slides/dist/reveal.js"></script>
+        <script src="/assets/slides/plugin/notes/notes.js"></script>
+        <script src="/assets/slides/plugin/markdown/markdown.js"></script>
+        <script src="/assets/slides/plugin/highlight/highlight.js"></script>
+        <script>
+            // More info about initialization & config:
+            // - https://revealjs.com/initialization/
+            // - https://revealjs.com/config/
+            Reveal.initialize({
+                hash: true,
+                slideNumber: "c/t",
+                // Learn about plugins: https://revealjs.com/plugins/
+                plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+            });
+        </script>
+    </body>
+</html>
