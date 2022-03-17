@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/BaseLayout.astro";
+import { Markdown } from "astro/components";
+
+import SvelteCounter from "../components/svelte/Counter.svelte";
+import { Counter as ReactCounter } from "../components/react/Counter.tsx";
+const astroDocs = await fetch(
+    "https://raw.githubusercontent.com/withastro/docs/main/README.md"
+).then((res) => res.text());
+---
+
+<Layout heading="Astro docs">
+    <Markdown content={astroDocs}>
+
+    </Markdown>
+
+    <Markdown>
+        # hej
+
+        <ReactCounter client:load />
+        <SvelteCounter client:idle />
+
+        # hopp
+    </Markdown>
+
+    <ReactCounter client:load />
+    <SvelteCounter client:idle />
+</Layout>

@@ -1,0 +1,22 @@
+h1 {
+    color: #40a030;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+}
+@media (min-width: 400px) {
+    header {
+        flex-direction: row;
+    }
+}
+header > nav {
+    display: flex;
+    justify-content: center;
+}
+header > nav > a {
+    margin: 0 1em;
+}

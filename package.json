@@ -1,0 +1,19 @@
+{
+    "name": "astro",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "astro dev",
+        "build": "astro build"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "astro": "^0.23",
+        "css-to-go": "^1.2.0",
+        "prettier-plugin-astro": "^0.0.12",
+        "xyz-testing-header": "^1.1.13"
+    }
+}

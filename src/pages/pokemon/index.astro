@@ -1,0 +1,23 @@
+---
+import Layout from "../../layouts/BaseLayout.astro";
+import { getPokemonList } from "../../services/pokemon.ts";
+
+const pokemon = await getPokemonList();
+---
+<style>
+    a {
+        text-transform: capitalize;
+    }
+</style>
+
+<Layout heading="Pokemon">
+    <ul>    
+    {
+        pokemon.map(pokemon => (
+            <li>
+                <a href={`/pokemon/${pokemon.name}`}>{pokemon.name}</a>          
+            </li>
+        ))
+    }
+    </ul>
+</Layout>

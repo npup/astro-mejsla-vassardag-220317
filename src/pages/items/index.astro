@@ -1,0 +1,18 @@
+---
+import Layout from "../../layouts/BaseLayout.astro";
+
+import { items } from "../../content/items.ts";
+---
+
+<Layout heading="Items">
+    <ul>
+    {
+        items.map(item => (
+            <li>
+                <a href={`/items/${item.slug}`}>{item.name}</a>
+            </li>
+        ))
+
+    }
+    </ul>
+</Layout>

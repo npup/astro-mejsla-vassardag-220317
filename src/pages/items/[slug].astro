@@ -1,0 +1,20 @@
+---
+import Layout from "../../layouts/BaseLayout.astro";
+import BackLink from "../../components/BackLink.astro";
+
+import { items } from "../../content/items.ts";
+
+export function getStaticPaths() {
+    return items.map((item) => ({
+        params: { slug: item.slug },
+        props: { item },
+    }));
+}
+
+const { item } = Astro.props;
+---
+
+<Layout heading="Item">
+    <BackLink href="/items" />
+    <pre>{JSON.stringify(item, null, 2)}</pre>
+</Layout>

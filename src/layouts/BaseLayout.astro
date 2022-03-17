@@ -1,0 +1,28 @@
+---
+import Header from "../components/Header.astro";
+import "css-to-go";
+const { heading } = Astro.props.content || Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="web page" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mejsla</title>
+        <link rel="stylesheet" href="/style/global.css" />
+        <style>
+            h1 {
+                color: #3f3f3f;
+            }
+        </style>
+    </head>
+    <body class="ctg-root ctg-container ctg-theme--light">
+        <Header />
+        <main>
+            <h1>{heading}</h1>
+            <slot />
+        </main>
+    </body>
+</html>

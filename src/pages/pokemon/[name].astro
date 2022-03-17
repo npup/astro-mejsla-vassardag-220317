@@ -1,0 +1,24 @@
+---
+import Layout from "../../layouts/BaseLayout.astro";
+import { getPokemonList, getPokemonDetails } from "../../services/pokemon.ts";
+import BackLink from "../../components/BackLink.astro";
+import { PokemonCard } from "xyz-testing-header";
+
+export async function getStaticPaths() {
+    const list = await getPokemonList();
+    const pokemon = await Promise.all(list.map(getPokemonDetails));
+    return pokemon.map((pokemon) => ({
+        params: { name: pokemon.name },
+        props: { pokemon },
+    }));
+}
+
+const { pokemon } = Astro.props;
+---
+
+<Layout heading="(1) Pokemon">
+    <BackLink href="/pokemon" />
+    <article>
+        <PokemonCard {pokemon} />
+    </article>
+</Layout>
